@@ -9,10 +9,15 @@ class MarkdownFormatterTest extends TestCase
 {
     protected static $formatter;
 
-    public function __construct(?string $name = null, array $data = [], $dataName = '')
+//    public function __construct(?string $name = null, array $data = [], $dataName = '')
+//    {
+//        parent::__construct($name, $data, $dataName);
+//        self::$formatter = new MarkdownFormatter();
+//    }
+
+    protected function setUp(): void
     {
-        parent::__construct($name, $data, $dataName);
-        self::$formatter = new MarkdownFormatter();
+        self::$formatter = self::$formatter ?? new MarkdownFormatter();
     }
 
     public function test_header()
