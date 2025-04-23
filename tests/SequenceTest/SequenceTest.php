@@ -45,6 +45,7 @@ class SequenceTest extends TestCase
     }
 
     /** @test */
+    #[Test]
     public function it_runs_the_migrations()
     {
         $tables = ['users0', 'users_seq1', 'users2', 'users2_account', 'users3'];

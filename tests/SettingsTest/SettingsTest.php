@@ -7,11 +7,13 @@ use bfinlay\SpreadsheetSeeder\Tests\TestCase;
 use bfinlay\SpreadsheetSeeder\Tests\UuidTest\UsersUuidSeeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use PHPUnit\Framework\Attributes\Test;
 
 class SettingsTest extends TestCase
 {
     use AssertsMigrations;
     /** @test */
+    #[Test]
     public function it_runs_the_migrations()
     {
         $this->assertsUsersMigration();
@@ -24,10 +26,10 @@ class SettingsTest extends TestCase
     {
         $this->seed(UsersUuidSeeder::class);
 
-        $user = \DB::table('users')->where('name', 'John')->first();
+        $user = DB::table('users')->where('name', 'John')->first();
         $this->assertNotNull($user->uuid);
         $this->assertTrue(Str::isUuid($user->uuid));
-        $this->assertEquals(2, \DB::table('users')->count());
+        $this->assertEquals(2, DB::table('users')->count());
     }
 
     public function test_sheetnames()

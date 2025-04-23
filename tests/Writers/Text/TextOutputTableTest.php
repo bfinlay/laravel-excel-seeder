@@ -5,7 +5,10 @@ namespace bfinlay\SpreadsheetSeeder\Tests\Writers\Text;
 use bfinlay\SpreadsheetSeeder\SpreadsheetSeederServiceProvider;
 use bfinlay\SpreadsheetSeeder\SpreadsheetSeederSettings;
 use bfinlay\SpreadsheetSeeder\Tests\Seeds\ClassicModelsSeeder;
+use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\TestCase;
+use PHPUnit\Framework\Attributes\Depends;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\Finder\Finder;
 
 /**
@@ -53,6 +56,7 @@ class TextOutputTableTest extends TestCase
     }
 
     /** @test */
+    #[Test]
     public function it_runs_the_migrations()
     {
         $this->assertEquals([
@@ -65,12 +69,13 @@ class TextOutputTableTest extends TestCase
             'customer_id',
             'created_at',
             'updated_at'
-        ], \Schema::getColumnListing('orders'));
+        ], Schema::getColumnListing('orders'));
     }
 
     /**
      * @depends it_runs_the_migrations
      */
+    #[Depends('it_runs_the_migrations')]
     public function test_seeder_text_output_tables()
     {
         $path = __DIR__ . '/../../../examples/classicmodels';

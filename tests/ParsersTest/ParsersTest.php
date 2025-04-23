@@ -4,11 +4,14 @@ namespace bfinlay\SpreadsheetSeeder\Tests\ParsersTest;
 
 use bfinlay\SpreadsheetSeeder\Tests\AssertsMigrations;
 use bfinlay\SpreadsheetSeeder\Tests\TestCase;
+use Illuminate\Support\Facades\DB;
+use PHPUnit\Framework\Attributes\Test;
 
 class ParsersTest extends TestCase
 {
     use AssertsMigrations;
     /** @test */
+    #[Test]
     public function it_runs_the_migrations()
     {
         $this->assertsUsersMigration();
@@ -21,9 +24,9 @@ class ParsersTest extends TestCase
     {
         $this->seed(UsersCsvParsersSeeder::class);
 
-        $user = \DB::table('users')->where('name', 'John')->first();
+        $user = DB::table('users')->where('name', 'John')->first();
         // verify parser has converted email from John@Doe.com to john@doe.com
         $this->assertEquals('john@doe.com', $user->email);
-        $this->assertEquals(2, \DB::table('users')->count());
+        $this->assertEquals(2, DB::table('users')->count());
     }
 }

@@ -8,6 +8,8 @@ use bfinlay\SpreadsheetSeeder\Tests\TestCase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
+use PHPUnit\Framework\Attributes\Depends;
+use PHPUnit\Framework\Attributes\Test;
 
 class EmptyValueTest extends TestCase
 {
@@ -16,6 +18,7 @@ class EmptyValueTest extends TestCase
     protected $emptyValueSeeder = EmptyValueSeeder::class;
 
     /** @test */
+    #[Test]
     public function it_runs_the_migrations()
     {
         $this->assertEquals([
@@ -59,6 +62,7 @@ class EmptyValueTest extends TestCase
     /**
      * @depends it_runs_the_migrations
      */
+    #[Depends('it_runs_the_migrations')]
     public function test_empty_values()
     {
         $this->seed($this->emptyValueSeeder);

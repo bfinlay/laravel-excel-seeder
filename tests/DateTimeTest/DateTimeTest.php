@@ -6,7 +6,9 @@ use bfinlay\SpreadsheetSeeder\Tests\AssertsMigrations;
 use bfinlay\SpreadsheetSeeder\Tests\Seeds\ClassicModelsSeeder;
 use bfinlay\SpreadsheetSeeder\Tests\TestCase;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use PHPUnit\Framework\Attributes\Depends;
+use PHPUnit\Framework\Attributes\Test;
 
 class DateTimeTest extends TestCase
 {
@@ -15,6 +17,7 @@ class DateTimeTest extends TestCase
     protected $dateTimeSeeder = DateTimeSeeder::class;
 
     /** @test */
+    #[Test]
     public function it_runs_the_migrations()
     {
         $this->assertsOrdersMigration();
@@ -32,9 +35,9 @@ class DateTimeTest extends TestCase
     {
         $this->seed(ClassicModelsSeeder::class);
 
-        $order = \DB::table('orders')->where('id', 10367)->first();
+        $order = DB::table('orders')->where('id', 10367)->first();
         $this->assertEquals(205, $order->customer_id);
-        $this->assertEquals(326, \DB::table('orders')->count());
+        $this->assertEquals(326, DB::table('orders')->count());
         $this->assertEquals((new Carbon('January 12 2005')), new Carbon($order->order_date));
         $this->assertEquals((new Carbon('January 21 2005')), new Carbon($order->required_date));
         $this->assertEquals((new Carbon('January 16 2005')), new Carbon($order->shipped_date));
@@ -49,7 +52,7 @@ class DateTimeTest extends TestCase
         $startSeedDate = date('Y-m-d H:i:s.u');
         $this->seed($this->dateTimeSeeder);
 
-        $rows = \DB::table('date_time_test')->get();
+        $rows = DB::table('date_time_test')->get();
         $fetchRowsDate = date('Y-m-d H:i:s.u');
 
         $row = $rows[0];
