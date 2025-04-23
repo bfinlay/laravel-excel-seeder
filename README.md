@@ -35,6 +35,7 @@ This package is tested against the following Laravel versions
 * Laravel 9.x
 * Laravel 10.x
 * Laravel 11.x
+* Laravel 12.x
 
 ## Contents
 - [Installation](#installation)
@@ -49,7 +50,7 @@ This package is tested against the following Laravel versions
 - [Changes](#changes)
 
 ## Installation
-### Laravel 8.x, 9.x, 10.x, 11.x
+### Laravel 8.x, 9.x, 10.x, 11.x, 12.x
 - Require this package directly by `composer require --dev -W bfinlay/laravel-excel-seeder`
 - Or add this package in your composer.json and run `composer update`
 
@@ -65,7 +66,7 @@ Laravel 5.8, 6.x, and 7.x require DBAL 2.x.  Because DBAL is a `require-dev` dep
 constraint will not be resolved by composer when installing a child package.  However, this is easy to solve by specifying DBAL 2.x as
 an additional dependency.
 
-Note that Laravel 5.8, 6.x, 7.x, 8.x, and 9.x are EOL.  See https://laravelversions.com/en.
+Note that Laravel 5.8, 6.x, 7.x, 8.x, 9.x, and 10.x are EOL.  See https://laravelversions.com/en.
 These versions will continue to be supported by this package for as long as reasonably possible, thanks to github actions performing the testing.
 
 To install for Laravel 5.8, 6.x, and 7.x:
@@ -997,6 +998,9 @@ MySQL automatically handles the sequence counter for its auto-incrementing colum
 Excel Seeder for Laravel is open-sourced software licensed under the MIT license.
 
 ## Changes
+#### 3.4.2
+- Update to Laravel 12 PR #32 (contributed by @raarevalo96)
+- Support running tests with PHPUnit 12
 #### 3.4.1
 - Fix issue #27.  Add MariaDB containers and MariaDB tests.  Improve test cases for empty values and explicit null values.
 #### 3.4.0

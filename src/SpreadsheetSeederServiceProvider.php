@@ -99,7 +99,16 @@ class SpreadsheetSeederServiceProvider extends ServiceProvider
         foreach($connections as $driver => $class) {
             Connection::resolverFor($driver, function($pdo, $database = '', $tablePrefix = '', array $config = []) use ($driver, $class) {
                 $connection = new $class['connection']($pdo, $database, $tablePrefix, $config);
-                $connection->setSchemaGrammar(new $class['schemaGrammar']);
+                
+                // In Laravel versions 11 and below, Illuminate\Database\Grammar does not expect any arguments
+                // in the constructor. In Laravel 12, it does. We need to check the version and pass the arguments
+                // if the version is 12 or above.
+
+                if (Semver::satisfies(app()->version(), '<12.0')) {
+                    $connection->setSchemaGrammar(new $class['schemaGrammar']());
+                } else {
+                    $connection->setSchemaGrammar(new $class['schemaGrammar']($connection));
+                }
 
                 return $connection;
             });

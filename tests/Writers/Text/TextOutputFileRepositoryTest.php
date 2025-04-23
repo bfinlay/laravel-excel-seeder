@@ -5,6 +5,7 @@ namespace bfinlay\SpreadsheetSeeder\Tests;
 use bfinlay\SpreadsheetSeeder\SpreadsheetSeederServiceProvider;
 use bfinlay\SpreadsheetSeeder\Writers\Text\TextOutputFileRepository;
 use Orchestra\Testbench\TestCase;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Runner\Version;
 use Symfony\Component\Finder\Finder;
 
@@ -62,6 +63,7 @@ class TextOutputFileRepositoryTest extends TestCase
     /**
      * @depends test_path_is_removed
      */
+    #[Depends('test_path_is_removed')]
     public function test_path_is_created()
     {
         $markdownRepository = new TextOutputFileRepository($this->path, ".md");
@@ -85,6 +87,7 @@ class TextOutputFileRepositoryTest extends TestCase
     /**
      * @depends test_path_is_created
      */
+    #[Depends('test_path_is_created')]
     public function test_old_markdown_files_deleted()
     {
         foreach (["md", ".md", "*.md"] as $extension) {
@@ -172,6 +175,7 @@ class TextOutputFileRepositoryTest extends TestCase
     /**
      * @depends test_markdown_files_created
      */
+    #[Depends('test_markdown_files_created')]
     public function test_yaml_files_created()
     {
         $this->assertTestFilesCreated($this->testFiles, 'yml');
@@ -181,6 +185,7 @@ class TextOutputFileRepositoryTest extends TestCase
     /**
      * @depends test_yaml_files_created
      */
+    #[Depends('test_yaml_files_created')]
     public function test_old_markdown_files_deleted_and_yaml_files_remain()
     {
         $deletedSheetName = $this->createDeletedSheet();

@@ -9,12 +9,15 @@ use bfinlay\SpreadsheetSeeder\Tests\TestCase;
 use bfinlay\SpreadsheetSeeder\Writers\Database\DestinationTable;
 use Illuminate\Database\Query\Grammars\PostgresGrammar;
 use Illuminate\Support\Facades\DB;
+use PHPUnit\Framework\Attributes\Depends;
+use PHPUnit\Framework\Attributes\Test;
 
 class ForeignKeyTruncateTest extends TestCase
 {
     use AssertsMigrations;
 
     /** @test */
+    #[Test]
     public function it_runs_the_migrations()
     {
         $this->assertsFavoriteNumbersMigration();
@@ -27,6 +30,7 @@ class ForeignKeyTruncateTest extends TestCase
      *
      * Postgres always truncates and cascades.  See vendor/laravel/framework/src/Illuminate/Database/Query/Grammars/PostgresGrammar.php compileTruncate(): truncate [table] restart identity cascade
      */
+    #[Depends('it_runs_the_migrations')]
     public function test_integrity_constraints_prevent_truncation()
     {
         if (DB::connection()->getDriverName() == "pgsql") $this->markTestSkipped('Test skipped for Postgres because Laravel always runs "truncate [table] restart identity cascade" for Postgres');
@@ -57,6 +61,7 @@ class ForeignKeyTruncateTest extends TestCase
      *
      * @depends it_runs_the_migrations
      */
+    #[Depends('it_runs_the_migrations')]
     public function test_destination_table_truncation_observes_integrity_constraints()
     {
         if (DB::connection()->getDriverName() == "pgsql") $this->markTestSkipped('Test skipped for Postgres because Laravel always runs "truncate [table] restart identity cascade" for Postgres');
@@ -86,6 +91,7 @@ class ForeignKeyTruncateTest extends TestCase
      *
      * @depends it_runs_the_migrations
      */
+    #[Depends('it_runs_the_migrations')]
     public function test_destination_table_truncation_ignores_integrity_constraints()
     {
         $this->seed(ForeignKeyTruncateSeeder::class);

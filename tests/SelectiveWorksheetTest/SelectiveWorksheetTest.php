@@ -8,6 +8,7 @@ use bfinlay\SpreadsheetSeeder\Tests\Seeds\ClassicModelsSeeder;
 use bfinlay\SpreadsheetSeeder\Tests\TestCase;
 use bfinlay\SpreadsheetSeeder\Writers\Database\DestinationTable;
 use Illuminate\Support\Facades\DB;
+use PHPUnit\Framework\Attributes\Test;
 
 class SelectiveWorksheetTest extends TestCase
 {
@@ -33,6 +34,7 @@ class SelectiveWorksheetTest extends TestCase
 
 
     /** @test */
+    #[Test]
     public function it_runs_the_migrations()
     {
         $this->assertsCustomersMigration();
@@ -210,7 +212,7 @@ class SelectiveWorksheetTest extends TestCase
             'products',
         ];
 
-        foreach ($emptyTables as $table) $this->assertEquals(0, \DB::table($table)->count());
+        foreach ($emptyTables as $table) $this->assertEquals(0, DB::table($table)->count());
     }
 
     public function test_only_specified_skipsheets_have_data()
@@ -240,7 +242,7 @@ class SelectiveWorksheetTest extends TestCase
             'products',
         ];
 
-        foreach ($emptyTables as $table) $this->assertEquals(0, \DB::table($table)->count());
+        foreach ($emptyTables as $table) $this->assertEquals(0, DB::table($table)->count());
     }
 
     public function test_all_tables_empty_when_nonexistant_table_specified()
@@ -308,7 +310,7 @@ class SelectiveWorksheetTest extends TestCase
 
         $this->assertTableHasExpectedData($testTables);
 
-        foreach ($emptyTables as $table) $this->assertEquals(0, \DB::table($table)->count());
+        foreach ($emptyTables as $table) $this->assertEquals(0, DB::table($table)->count());
     }
 
     public function test_xl_seed_command_multiple_sheet_options()
@@ -334,7 +336,7 @@ class SelectiveWorksheetTest extends TestCase
 
         $this->assertTableHasExpectedData($testTables);
 
-        foreach ($emptyTables as $table) $this->assertEquals(0, \DB::table($table)->count());
+        foreach ($emptyTables as $table) $this->assertEquals(0, DB::table($table)->count());
     }
 
     public function test_xl_seed_command_single_sheet_argument()
@@ -358,7 +360,7 @@ class SelectiveWorksheetTest extends TestCase
 
         $this->assertTableHasExpectedData($testTables);
 
-        foreach ($emptyTables as $table) $this->assertEquals(0, \DB::table($table)->count());
+        foreach ($emptyTables as $table) $this->assertEquals(0, DB::table($table)->count());
     }
 
     public function test_xl_seed_command_multiple_sheet_arguments()
@@ -382,7 +384,7 @@ class SelectiveWorksheetTest extends TestCase
 
         $this->assertTableHasExpectedData($testTables);
 
-        foreach ($emptyTables as $table) $this->assertEquals(0, \DB::table($table)->count());
+        foreach ($emptyTables as $table) $this->assertEquals(0, DB::table($table)->count());
     }
 
     public function test_xl_seed_command_class_hash_option()
@@ -471,53 +473,53 @@ class SelectiveWorksheetTest extends TestCase
         if (is_string($table)) $table = [$table];
 
         if (in_array('customers', $table)) {
-            $customer = \DB::table('customers')->where('id', '=', 103)->first();
+            $customer = DB::table('customers')->where('id', '=', 103)->first();
             $this->assertEquals('Schmitt', $customer->contact_last_name);
-            $this->assertEquals(122, \DB::table('customers')->count());
+            $this->assertEquals(122, DB::table('customers')->count());
         }
 
         if (in_array('employees', $table)) {
-            $employee = \DB::table('employees')->where('id', 1216)->first();
+            $employee = DB::table('employees')->where('id', 1216)->first();
             $this->assertEquals('Steve', $employee->first_name);
             $this->assertEquals('Patterson', $employee->last_name);
-            $this->assertEquals(23, \DB::table('employees')->count());
+            $this->assertEquals(23, DB::table('employees')->count());
         }
 
         if (in_array('offices', $table)) {
-            $offices = \DB::table('offices')->where('id', 4)->first();
+            $offices = DB::table('offices')->where('id', 4)->first();
             $this->assertEquals('Paris', $offices->city);
-            $this->assertEquals(7, \DB::table('offices')->count());
+            $this->assertEquals(7, DB::table('offices')->count());
         }
 
         if (in_array('order_details', $table)) {
-            $orderDetail = \DB::table('order_details')->where('id', 470)->first();
+            $orderDetail = DB::table('order_details')->where('id', 470)->first();
             $this->assertEquals('S24_2840', $orderDetail->product_code);
-            $this->assertEquals(2996, \DB::table('order_details')->count());
+            $this->assertEquals(2996, DB::table('order_details')->count());
         }
 
         if (in_array('orders', $table)) {
-            $order = \DB::table('orders')->where('id', 10407)->first();
+            $order = DB::table('orders')->where('id', 10407)->first();
             $this->assertEquals(450, $order->customer_id);
             $this->assertEquals('On Hold', $order->status);
-            $this->assertEquals(326, \DB::table('orders')->count());
+            $this->assertEquals(326, DB::table('orders')->count());
         }
 
         if (in_array('payments', $table)) {
-            $payment = \DB::table('payments')->where('id', 18)->first();
+            $payment = DB::table('payments')->where('id', 18)->first();
             $this->assertEquals(101244.59, $payment->amount);
-            $this->assertEquals(273, \DB::table('payments')->count());
+            $this->assertEquals(273, DB::table('payments')->count());
         }
 
         if (in_array('product_lines', $table)) {
-            $product_line = \DB::table('product_lines')->where('id', 7)->first();
+            $product_line = DB::table('product_lines')->where('id', 7)->first();
             $this->assertEquals('Vintage Cars', $product_line->product_line);
-            $this->assertEquals(7, \DB::table('product_lines')->count());
+            $this->assertEquals(7, DB::table('product_lines')->count());
         }
 
         if (in_array('products', $table)) {
-            $product = \DB::table('products')->where('id', 85)->first();
+            $product = DB::table('products')->where('id', 85)->first();
             $this->assertEquals("1980's GM Manhattan Express", $product->name);
-            $this->assertEquals(110, \DB::table('products')->count());
+            $this->assertEquals(110, DB::table('products')->count());
         }
     }
 }
