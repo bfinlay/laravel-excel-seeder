@@ -26,12 +26,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-#        php: ["7.3", "7.4", "8.0", "8.1", "8.2", "8.3"]
-#        laravel: [^5.8, ^6.0, ^7.0, ^8.0, ^9.0, ^10.0, ^11.0, ^12.0]
-#        dbal: [^2.6, ^3.0]
-        php: ["8.3"]
-        laravel: [^12.0]
-        dbal: [^3.0]
+        php: ["7.3", "7.4", "8.0", "8.1", "8.2", "8.3"]
+        laravel: [^5.8, ^6.0, ^7.0, ^8.0, ^9.0, ^10.0, ^11.0, ^12.0]
+        dbal: [^2.6, ^3.0]
+#        php: ["8.3"]
+#        laravel: [^12.0]
+#        dbal: [^3.0]
         exclude:
           - php: 7.2
             laravel: ^8.0
@@ -133,14 +133,14 @@ jobs:
       - name: List Database Containers
         run: docker compose ps
 
-#      - name: Run SQLite PHPUnit Tests
-#        run: vendor/phpunit/phpunit/phpunit tests
-#      - name: Run MySQL PHPUnit Tests
-#        run: vendor/phpunit/phpunit/phpunit --configuration phpunit-mysql.xml tests
-#      - name: Run MariaDB PHPUnit Tests
-#        run: vendor/phpunit/phpunit/phpunit --configuration phpunit-mariadb.xml tests
-#      - name: Run Postgres PHPUnit Tests
-#        run: vendor/phpunit/phpunit/phpunit --configuration phpunit-postgres.xml tests
+      - name: Run SQLite PHPUnit Tests
+        run: vendor/phpunit/phpunit/phpunit tests
+      - name: Run MySQL PHPUnit Tests
+        run: vendor/phpunit/phpunit/phpunit --configuration phpunit-mysql.xml tests
+      - name: Run MariaDB PHPUnit Tests
+        run: vendor/phpunit/phpunit/phpunit --configuration phpunit-mariadb.xml tests
+      - name: Run Postgres PHPUnit Tests
+        run: vendor/phpunit/phpunit/phpunit --configuration phpunit-postgres.xml tests
 
       - name: 'App Package-Inclusion Test: Create Laravel Project'
         run: |
@@ -148,7 +148,7 @@ jobs:
       - name: 'App Package-Inclusion Test: Install Laravel Excel Seeder package'
         working-directory: ../issue-22
         run: |
-          BRANCH=pr-32
+          BRANCH=master
           if [[ ${GITHUB_EVENT_NAME} == 'push' || ${GITHUB_EVENT_NAME} == 'workflow_dispatch' ]]; then
             BRANCH=${GITHUB_REF_NAME}
           fi
