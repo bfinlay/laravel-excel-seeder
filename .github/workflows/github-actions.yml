@@ -149,7 +149,7 @@ jobs:
         working-directory: ../issue-22
         run: |
           BRANCH=pr-32
-          if [ ${GITHUB_EVENT_NAME} == 'push' || ${GITHUB_EVENT_NAME} == 'workflow_dispatch']; then
+          if [ ${GITHUB_EVENT_NAME} == 'push' || ${GITHUB_EVENT_NAME} == 'workflow_dispatch' ]; then
             BRANCH=${GITHUB_REF_NAME}
           fi
           echo Github Event Name is ${GITHUB_EVENT_NAME}
