@@ -9,10 +9,15 @@ class YamlFormatterTest extends TestCase
 {
     protected static $formatter;
 
-    public function __construct(?string $name = null, array $data = [], $dataName = '')
+//    public function __construct(?string $name = null, array $data = [], $dataName = '')
+//    {
+//        parent::__construct($name, $data, $dataName);
+//        self::$formatter = new YamlFormatter();
+//    }
+
+    protected function setUp(): void
     {
-        parent::__construct($name, $data, $dataName);
-        self::$formatter = new YamlFormatter();
+        self::$formatter = self::$formatter ?? new YamlFormatter();
     }
 
     public function test_header()

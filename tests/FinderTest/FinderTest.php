@@ -8,6 +8,8 @@ use bfinlay\SpreadsheetSeeder\SpreadsheetSeederSettings;
 use bfinlay\SpreadsheetSeeder\Tests\AssertsMigrations;
 use bfinlay\SpreadsheetSeeder\Tests\TestCase;
 use Illuminate\Support\Facades\DB;
+use PHPUnit\Framework\Attributes\Depends;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\Finder\Finder;
 
 class FinderTest extends TestCase
@@ -15,6 +17,7 @@ class FinderTest extends TestCase
     use AssertsMigrations;
 
     /** @test */
+    #[Test]
     public function it_runs_the_migrations()
     {
         $this->assertsCustomersMigration();
@@ -23,6 +26,7 @@ class FinderTest extends TestCase
     /**
      * @depends it_runs_the_migrations
      */
+    #[Depends('it_runs_the_migrations')]
     public function test_without_finder_all_files()
     {
         $testTables = [
@@ -51,6 +55,7 @@ class FinderTest extends TestCase
     /**
      * @depends it_runs_the_migrations
      */
+    #[Depends('it_runs_the_migrations')]
     public function test_finder_all_files()
     {
         $testTables = [
@@ -80,6 +85,7 @@ class FinderTest extends TestCase
     /**
      * @depends it_runs_the_migrations
      */
+    #[Depends('it_runs_the_migrations')]
     public function test_finder_exclude_customers()
     {
         $testTables = [
