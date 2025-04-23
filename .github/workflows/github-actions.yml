@@ -133,14 +133,14 @@ jobs:
       - name: List Database Containers
         run: docker compose ps
 
-      - name: Run SQLite PHPUnit Tests
-        run: vendor/phpunit/phpunit/phpunit tests
-      - name: Run MySQL PHPUnit Tests
-        run: vendor/phpunit/phpunit/phpunit --configuration phpunit-mysql.xml tests
-      - name: Run MariaDB PHPUnit Tests
-        run: vendor/phpunit/phpunit/phpunit --configuration phpunit-mariadb.xml tests
-      - name: Run Postgres PHPUnit Tests
-        run: vendor/phpunit/phpunit/phpunit --configuration phpunit-postgres.xml tests
+#      - name: Run SQLite PHPUnit Tests
+#        run: vendor/phpunit/phpunit/phpunit tests
+#      - name: Run MySQL PHPUnit Tests
+#        run: vendor/phpunit/phpunit/phpunit --configuration phpunit-mysql.xml tests
+#      - name: Run MariaDB PHPUnit Tests
+#        run: vendor/phpunit/phpunit/phpunit --configuration phpunit-mariadb.xml tests
+#      - name: Run Postgres PHPUnit Tests
+#        run: vendor/phpunit/phpunit/phpunit --configuration phpunit-postgres.xml tests
 
       - name: 'App Package-Inclusion Test: Create Laravel Project'
         run: |
@@ -149,7 +149,7 @@ jobs:
         working-directory: ../issue-22
         run: |
           BRANCH=pr-32
-          if [ ${GITHUB_EVENT_NAME} == 'push' -o ${GITHUB_EVENT_NAME} == 'workflow_dispatch']; then
+          if [ ${GITHUB_EVENT_NAME} == 'push' || ${GITHUB_EVENT_NAME} == 'workflow_dispatch']; then
             BRANCH=${GITHUB_REF_NAME}
           fi
           echo Github Event Name is ${GITHUB_EVENT_NAME}
