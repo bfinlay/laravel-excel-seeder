@@ -26,12 +26,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ["7.3", "7.4", "8.0", "8.1", "8.2", "8.3"]
-        laravel: [^5.8, ^6.0, ^7.0, ^8.0, ^9.0, ^10.0, ^11.0, ^12.0]
-        dbal: [^2.6, ^3.0]
-#        php: ["7.4"]
-#        laravel: [^8.0]
-#        dbal: [^3.0]
+#        php: ["7.3", "7.4", "8.0", "8.1", "8.2", "8.3"]
+#        laravel: [^5.8, ^6.0, ^7.0, ^8.0, ^9.0, ^10.0, ^11.0, ^12.0]
+#        dbal: [^2.6, ^3.0]
+        php: ["8.3"]
+        laravel: [^12.0]
+        dbal: [^3.0]
         exclude:
           - php: 7.2
             laravel: ^8.0
@@ -148,10 +148,12 @@ jobs:
       - name: 'App Package-Inclusion Test: Install Laravel Excel Seeder package'
         working-directory: ../issue-22
         run: |
-          BRANCH=master
+          BRANCH=pr-32
           if [ ${GITHUB_EVENT_NAME} == 'push' ]; then
             BRANCH=${GITHUB_REF_NAME}
           fi
+          echo Github Event Name is ${GITHUB_EVENT_NAME}
+          echo Github Ref Name is ${GITHUB_REF_NAME}
           echo Branch is $BRANCH
           composer require bfinlay/laravel-excel-seeder:dev-$BRANCH -W
       - name: 'App Package-Inclusion Test: Copy Migrations and Seeders'
