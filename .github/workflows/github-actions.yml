@@ -26,10 +26,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ["7.3", "7.4", "8.0", "8.1", "8.2", "8.3"]
+        php: ["7.3", "7.4", "8.0", "8.1", "8.2", "8.3", "8.4"]
         laravel: [^5.8, ^6.0, ^7.0, ^8.0, ^9.0, ^10.0, ^11.0, ^12.0]
         dbal: [^2.6, ^3.0]
-#        php: ["8.3"]
+#        php: ["8.4"]
 #        laravel: [^12.0]
 #        dbal: [^3.0]
         exclude:
@@ -88,6 +88,12 @@ jobs:
           - php: 8.3
             laravel: ^6.0
           - php: 8.3
+            laravel: ^7.0
+          - php: 8.4
+            laravel: ^5.8
+          - php: 8.4
+            laravel: ^6.0
+          - php: 8.4
             laravel: ^7.0
           - laravel: ^5.8
             dbal: ^3.0
