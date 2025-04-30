@@ -218,7 +218,7 @@ class DestinationTable
     {
         $c = $this->columnInfo[$column];
 
-        $numericTypes = ['smallint', 'integer', 'bigint', 'tinyint', 'decimal', 'float'];
+        $numericTypes = ['smallint', 'integer', 'bigint', 'tinyint', 'decimal', 'float', 'numeric'];
         if (in_array($c->getType(), $numericTypes)) return true;
         return false;
 
