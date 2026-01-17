@@ -161,7 +161,7 @@ jobs:
           echo Github Event Name is ${GITHUB_EVENT_NAME}
           echo Github Ref Name is ${GITHUB_REF_NAME}
           echo Branch is $BRANCH
-          composer require bfinlay/laravel-excel-seeder:dev-$BRANCH -W
+          composer --no-security-blocking require bfinlay/laravel-excel-seeder:dev-$BRANCH -W
       - name: 'App Package-Inclusion Test: Copy Migrations and Seeders'
         working-directory: ../issue-22
         run: |
