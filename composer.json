@@ -7,6 +7,12 @@
 			"name": "Brion Finlay"
 		}
 	],
+	"config": {
+		"comment": "security auditing is disabled for legacy versions, but will be enabled for currently supported versions",
+		"audit": {
+			"block-insecure": false
+		}
+	},
 	"keywords": [ "laravel", "csv", "excel", "seed", "seeds", "seeder", "seeding", "open", "libre", "office", "openoffice", "libreoffice"],
 	"license": "MIT",
 	"minimum-stability": "stable",
