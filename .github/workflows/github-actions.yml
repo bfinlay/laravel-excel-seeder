@@ -150,7 +150,7 @@ jobs:
 
       - name: 'App Package-Inclusion Test: Create Laravel Project'
         run: |
-          cd ..; composer create-project laravel/laravel:${{ matrix.laravel }} issue-22
+          cd ..; composer --no-security-blocking create-project laravel/laravel:${{ matrix.laravel }} issue-22
       - name: 'App Package-Inclusion Test: Install Laravel Excel Seeder package'
         working-directory: ../issue-22
         run: |
